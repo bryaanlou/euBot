@@ -1,7 +1,9 @@
 import discord 
+import json
 import random
 
 from discord.ext import commands
+
 
 class Miscellaneous(commands.Cog):
 
@@ -37,6 +39,20 @@ class Miscellaneous(commands.Cog):
         """ Coinflip! """
         coinsides = ['Heads', 'Tails']
         await ctx.send(f"**{ctx.author.name}** flipped a coin and got **{random.choice(coinsides)}**!")
+
+    @commands.command(aliases=['8ball'])
+    async def eightball(self, ctx, *, question=None):
+        """Ask questions to the 8ball"""
+        with open('eucliwood/data/8ball.json') as f:
+            choices = json.load(f)
+        author = ctx.message.author
+        emb = discord.Embed()
+        # emb.color = await ctx.get_dominant_color(url=author.avatar_url)
+        emb.set_author(name='\N{WHITE QUESTION MARK ORNAMENT} Your question:', icon_url=author.avatar_url)
+        emb.description = question
+        emb.add_field(name='\N{BILLIARDS} Your answer:', value=random.choice(choices), inline=True)
+        await ctx.send(embed=emb)
+
 
 def setup(bot):
     bot.add_cog(Miscellaneous(bot))

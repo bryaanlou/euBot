@@ -7,8 +7,9 @@ eucliwood = commands.Bot (
     case_insensitive = True,
     max_messages = 10_000,
 )
+
 # On startup
-print(" Bot starting! ")
+print(" beep boop! ")
 
 # Commands
 eucliwood.load_extension("cogs.misc")
@@ -18,4 +19,4 @@ eucliwood.run(token.readline())
 
 
 # On shutdown
-print(" Bot turning off ")
+print(" boop beep ")
